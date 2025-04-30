@@ -1,10 +1,19 @@
 import fetch from "node-fetch";
-const API_KEY = 'API_KEY_HERE'; //update with your API key
+import dotenv from 'dotenv';
+
+let API_KEY = process.env.API_KEY || '';
+let NATION_ID = process.env.NATION_ID || '';
+
+export function setConfig(apiKey, nationId) {
+    API_KEY = apiKey;
+    NATION_ID = nationId;
+}
+
 const GRAPHQL_ENDPOINT = `https://api.politicsandwar.com/graphql?api_key=${API_KEY}`;
 
-export function createResourceCount(){
+export function createResourceCount() {
     return `query{
-        nations(id:672995){
+        nations(id:${NATION_ID}){
           data{
             money
             food
@@ -20,7 +29,7 @@ export function createResourceCount(){
             aluminum
           }
         }
-      }`;      
+      }`;
 }
 
 export async function getResourceCount(){
@@ -149,4 +158,4 @@ export async function getBestSellOffer(resource){
     return data.data?.top_trade_info?.resources?.[0]?.best_sell_offer;
 }
 
-export{API_KEY};
+export { API_KEY, NATION_ID };
