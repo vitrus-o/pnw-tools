@@ -18,8 +18,10 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "node-fetch": "^3.3.2",
     "open": "^9.1.0",
+    "puppeteer": "^24.7.2",
     "pusher-js": "^8.4.0",
     "ws": "^8.18.1"
   }

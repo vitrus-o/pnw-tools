@@ -14,14 +14,13 @@ const __dirname = path.dirname(__filename);
 const tools = {
     'Warloot Calculator': 'src\\warloot-calculator.js',
     'Espionage Calculator': 'src\\espionage-calculator.js',
-    'Mistrade Finder': 'src\\mistrade-finder.js',
-    'Prefill Deposit': 'src\\prefill-deposit.js',
+    'Bank Deposit Helper': 'src\\prefill-deposit.js',
     'Configure Settings': 'config',
     'Exit': 'exit'
 };
 
-async function updateEnvFile(apiKey, nationId) {
-    const envContent = `API_KEY=${apiKey}\nNATION_ID=${nationId}`;
+async function updateEnvFile(apiKey, nationId, allianceId) {
+    const envContent = `API_KEY=${apiKey}\nNATION_ID=${nationId}\nALLIANCE_ID=${allianceId}`;
     await fs.writeFile('.env', envContent);
 }
 
@@ -39,11 +38,19 @@ async function configureSettings() {
             message: 'Enter your nation ID:',
             default: process.env.NATION_ID || '',
             validate: (input) => !isNaN(input) || 'Please enter a valid number'
+        },
+        {
+            type: 'input',
+            name: 'allianceId',
+            message: 'Enter your alliance ID:',
+            default: process.env.ALLIANCE_ID || '4124',
+            validate: (input) => !isNaN(input) || 'Please enter a valid number'
         }
     ]);
 
-    await updateEnvFile(answers.apiKey, answers.nationId);
-    console.log('Configuration updated successfully!');
+    await updateEnvFile(answers.apiKey, answers.nationId, answers.allianceId);
+    console.log('Configuration updated successfully! Run a new instance of the program to apply changes.');
+    process.exit(0);
 }
 
 const main = async () => {
@@ -65,8 +72,8 @@ const main = async () => {
                 await configureSettings();
                 continue;
             }
-            if(!process.env.API_KEY || !process.env.NATION_ID) {
-                console.log('Please configure your API key and nation ID first.');
+            if(!process.env.API_KEY || !process.env.NATION_ID || !process.env.ALLIANCE_ID) {
+                console.log('Please configure your settings first.');
                 await configureSettings();
                 continue;
             }

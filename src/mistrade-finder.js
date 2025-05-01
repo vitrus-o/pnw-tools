@@ -1,10 +1,28 @@
+import dotenv from 'dotenv';
+import path from 'path';
 import Pusher from "pusher-js";
 import open from "open";
-import {API_KEY, createBestBuyOfferQuery, createBestSellOfferQuery, getBestBuyOffer, getBestSellOffer} from "./utils/api.js";
+import { fileURLToPath } from 'url';
+import { API_KEY, createBestBuyOfferQuery, createBestSellOfferQuery, getBestBuyOffer, getBestSellOffer } from "./utils/api.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
+
+console.log('Starting Mistrade Finder...');
+console.log('Connecting to socket...');
+
+if (!process.env.API_KEY) {
+    console.error('Error: API_KEY not found in .env file');
+    process.exit(1);
+}
 
 const channelName = JSON.parse(await(await fetch(`https://api.politicsandwar.com/subscriptions/v1/subscribe/trade/create?api_key=${API_KEY}`,{
   method: 'GET',
 })).text()).channel;
+
+console.log('Successfully connected to socket');
 
 const pusher = new Pusher("a22734a47847a64386c8",{
   cluster: "mt1",
@@ -14,6 +32,15 @@ const pusher = new Pusher("a22734a47847a64386c8",{
 });
 
 const channel = pusher.subscribe(channelName);
+
+channel.bind('pusher:subscription_error', (error) => {
+  console.error('Failed to subscribe to trade channel:', error);
+  process.exit(1);
+});
+
+channel.bind('pusher:subscription_succeeded', () => {
+  console.log('Successfully subscribed to trade channel');
+});
 
 function calculateProfit(queryPrice, dataPrice, queryAmount, dataAmount, isBuy = false) {
   return isBuy ? (dataPrice - queryPrice) * Math.min(queryAmount, dataAmount) : (queryPrice - dataPrice) * Math.min(queryAmount, dataAmount);

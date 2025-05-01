@@ -1,5 +1,13 @@
-import fetch from "node-fetch";
 import dotenv from 'dotenv';
+import path from 'path';
+import Pusher from "pusher-js";
+import open from "open";
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
 let API_KEY = process.env.API_KEY || '';
 let NATION_ID = process.env.NATION_ID || '';
