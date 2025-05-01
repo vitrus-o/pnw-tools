@@ -31,7 +31,7 @@ cd pnw-tools
 
 2. Install dependencies:
 ```bash
-npm install
+npm install inquirer dotenv node-fetch open pusher-js
 ```
 
 ## Configuration
