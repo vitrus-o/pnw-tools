@@ -14,6 +14,7 @@ const __dirname = path.dirname(__filename);
 const tools = {
     'Warloot Calculator': 'src\\warloot-calculator.js',
     'Espionage Calculator': 'src\\espionage-calculator.js',
+    'Warchest Calculator': 'src\\warchest-calculator.js',
     'Bank Deposit Helper': 'src\\prefill-deposit.js',
     'Configure Settings': 'config',
     'Exit': 'exit'
