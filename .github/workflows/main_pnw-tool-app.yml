@@ -1,18 +1,20 @@
 name: Discord Notification
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Discord Webhook
-        uses: Ilshidur/action-discord@master
+      - uses: actions/checkout@v2
+      - name: Discord Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
         with:
-          args: '{{ EVENT_PAYLOAD.repository.full_name }} - New ${{ github.event_name }} by ${{ github.actor }}'
+          args: |
+            **New ${{ github.event_name }}**
+            Repository: ${{ github.repository }}
+            By: ${{ github.actor }}
+            ```
+            ${{ github.event.head_commit.message }}
+            ```
