@@ -69,7 +69,7 @@ export async function getCities(){
 
 export function createCities(){
     return `query{
-        nations(id:672995){
+        nations(id:${NATION_ID}){
           data{
             cities{
               id

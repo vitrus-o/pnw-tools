@@ -12,9 +12,9 @@ jobs:
         uses: Ilshidur/action-discord@master
         with:
           args: |
-            **New ${{ github.event_name }}**
-            Repository: ${{ github.repository }}
-            By: ${{ github.actor }}
+            **@everyone ${{ github.actor }} just pushed a new commit**
             ```
             ${{ github.event.head_commit.message }}
             ```
+            Do a **git pull** within your local repository to get the latest changes.
+

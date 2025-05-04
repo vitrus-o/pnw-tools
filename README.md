@@ -103,4 +103,4 @@ mistrade.bat
 5. Create a Pull Request
 
 ## License
-MIT
+GPL-3.0
