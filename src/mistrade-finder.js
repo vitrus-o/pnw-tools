@@ -56,10 +56,12 @@ channel.bind("BULK_TRADE_CREATE", async (trades) => {
               const isBuy = trade.buy_or_sell === "buy";
               const profit = calculateProfit(offer.price,trade.price,offer.offer_amount,trade.offer_amount,isBuy);
               if(profit > 0){
-                console.log(`\n\n\n\nProfitS: $${profit}\n\n${trade.offer_amount} ${trade.offer_resource} ${(trade.buy_or_sell === "buy" ? "bought" : "sold")} at ${trade.price}\n${offer.offer_amount} ${trade.offer_resource} ${(trade.buy_or_sell === "buy" ? "sold" : "bought")} at ${offer.price}\n`);
+                console.log(`\n\n\n\nBuy: ${Math.min(trade.offer_amount,offer.offer_amount)} Profits: $${profit}\n\n${trade.offer_amount} ${trade.offer_resource} ${(trade.buy_or_sell === "buy" ? "bought" : "sold")} at ${trade.price}\n${offer.offer_amount} ${trade.offer_resource} ${(trade.buy_or_sell === "buy" ? "sold" : "bought")} at ${offer.price}\n`);
                 const url = 'https://politicsandwar.com/index.php?id=26&display=world&resource1=' + trade.offer_resource + '&buysell=' + trade.buy_or_sell + '&ob=price&od=DEF&maximum=10&minimum=0&search=Go';
                 console.log(url);
                 await open(url);
+                //if sell check if enough resources to sell
+                //if trade.offer_amount > offer.offer_amount check next trade offer
               }
           }
       }).catch(error => {
