@@ -38,7 +38,7 @@ npm install
 ## Configuration
 Configure your credentials in one of two ways:
 
-1. Environment Variables (Recommended):
+1. Environment Variables:
    - Create `.env` file in project root
    - Add your credentials:
 ```plaintext
@@ -47,7 +47,12 @@ NATION_ID=your_nation_id_here
 ALLIANCE_ID=your_alliance_id_here
 ```
 
-2. CLI Interface:
+2. API Key Configuration
+   - Go to [PnW API Access](https://politicsandwar.com/account/#7)
+   - Enable the following permissions:
+   - Nation View Resources (required for Warchest Calculator and Bank Deposit Helper)
+
+3. CLI Interface:
 ```bash
 node main.js
 # Select 'Configure Settings'

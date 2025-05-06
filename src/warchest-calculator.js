@@ -56,8 +56,10 @@ async function getNeededWarchest() {
     let total = 0;
     for (const [resource, amount] of Object.entries(buy)) {
         const formattedAmount = amount.toLocaleString();
-        console.log(`${resource.padEnd(10)}: ${formattedAmount} at $${prices[resource].toLocaleString()} ppu = $${(prices[resource] * amount).toLocaleString()}`);
-        total += prices[resource] * amount;
+        if (resource !== 'money'){
+            console.log(`${resource.padEnd(10)}: ${formattedAmount} at $${prices[resource].toLocaleString()} ppu = $${(prices[resource] * amount).toLocaleString()}`);
+            total += prices[resource] * amount;
+        }
     }
     console.log(`\nTotal: $${total.toLocaleString()}`);
 }
