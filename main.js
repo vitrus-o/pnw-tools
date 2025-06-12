@@ -16,6 +16,7 @@ const tools = {
     'Espionage Calculator': 'src\\espionage-calculator.js',
     'Warchest Calculator': 'src\\warchest-calculator.js',
     'Bank Deposit Helper': 'src\\prefill-deposit.js',
+    'Bank Withdraw Helper': 'src\\withdraw-helper.js',
     'Configure Settings': 'config',
     'Exit': 'exit'
 };

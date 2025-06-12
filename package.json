@@ -17,12 +17,16 @@
   "author": "xi",
   "type": "module",
   "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "googleapis": "^148.0.0",
     "node-fetch": "^3.3.2",
+    "node-schedule": "^2.1.1",
     "open": "^9.1.0",
     "puppeteer": "^24.7.2",
     "pusher-js": "^8.4.0",
-    "ws": "^8.18.1"
+    "ws": "^8.18.1",
+    "xlsx": "^0.18.5"
   }
 }
