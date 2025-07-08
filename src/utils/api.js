@@ -81,16 +81,16 @@ export function createCities(){
 
  export function createBestBuyOfferQuery(resource) {
      return `
-       query {
-      top_trade_info {
-        resources(resource: [${resource.toUpperCase()}]) {
-          best_buy_offer {
-            date
-            offer_amount
-            price
-          }
+        query {
+        top_trade_info {
+            resources(resource: [${resource.toUpperCase()}]) {
+              best_buy_offer {
+                date
+                offer_amount
+                price
+            }
+            }
         }
-      }
     }
   `;
 }
